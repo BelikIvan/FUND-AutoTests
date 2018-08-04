@@ -31,14 +31,14 @@ public class TestForgotPass {
         WebElement ForgotSpan = driver.findElement(By.xpath("//span[contains(text(), 'Forgot Your Password?')]"));
         ForgotSpan.click();
 
-        // Восстанавливаем пароль
+        // Восстанавливаем пароль (не забываем указать email)
         WebElement EmailInput = driver.findElement(By.id("email_address"));
         EmailInput.sendKeys("testibstest@gmail.com");
         WebElement ResetSpan = driver.findElement(By.xpath("//span[contains(text(), 'Reset My Password')]"));
         ResetSpan.click();
         Thread.sleep(3000);
 
-        // Делаем проверку
+        // Делаем проверку (не забываем прописать email в 43 и 45 строке)
         Thread.sleep(2000);
         WebElement ResetSuccess = driver.findElement(By.xpath("//div[text()='If there is an account associated with testibstest@gmail.com you will receive an email with a link to reset your password.']"));
         String TestResetSuccess = ResetSuccess.getText();

@@ -41,7 +41,7 @@ public class TestReg {
         WebElement SubInput = driver.findElement(By.id("is_subscribed"));
         SubInput.click();
         WebElement EmailInput = driver.findElement(By.id("email_address"));
-        EmailInput.sendKeys("testibstest@gmail.com");
+        EmailInput.sendKeys("testibstest@gmail.com"); // Не забыть заменить email
         WebElement PassInput = driver.findElement(By.id("password"));
         PassInput.sendKeys("!test123!");
         WebElement CpassInput = driver.findElement(By.id("password-confirmation"));
