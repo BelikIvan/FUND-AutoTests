@@ -1,19 +1,19 @@
-import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class TestSearch {
     /*---------------------------------------- Test Setup ----------------------------------------*/
     private WebDriver driver;
 
     @BeforeClass
-    public static void classSetup() {
+    public void classSetup() {
         System.setProperty("webdriver.chrome.driver", "E:/InstallProgram/drivers/chromedriver/chromedriver.exe");
-    }
-    @Before
-    public void setupTest() {
         driver = new ChromeDriver();
         driver.get("https://ffcdev.fundraisingforacause.com/");
         driver.manage().window().maximize();
@@ -31,7 +31,7 @@ public class TestSearch {
         Assert.assertEquals(driver.getTitle(), title);
 
     }
-    @After
+    @AfterClass
     public void teardownTest() {
         driver.quit();
     }
