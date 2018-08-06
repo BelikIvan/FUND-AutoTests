@@ -1,23 +1,25 @@
-import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import java.util.UUID;
 
 public class TestReg {
     /*---------------------------------------- Test Setup ----------------------------------------*/
     private WebDriver driver;
 
     @BeforeClass
-    public static void classSetup() {
+    public void classSetup() {
         System.setProperty("webdriver.chrome.driver", "E:/InstallProgram/drivers/chromedriver/chromedriver.exe");
-    }
-    @Before
-    public void setupTest() {
         driver = new ChromeDriver();
         driver.get("https://ffcdev.fundraisingforacause.com/");
         driver.manage().window().maximize();
     }
+
     /*---------------------------------------- Test ----------------------------------------*/
     @Test
     public void testReg() throws InterruptedException {
@@ -33,6 +35,10 @@ public class TestReg {
         String UrlReg = "https://ffcdev.fundraisingforacause.com/customer/account/create/";
         Assert.assertEquals(driver.getCurrentUrl(), UrlReg);
 
+        // Генерируем email для регистрации
+        UUID id = UUID.randomUUID();
+        String mail = id+"@gmail.com";
+
         // Заполняем поля для регистрации и кликаем на кнопку зарегистрироваться
         WebElement NameInput = driver.findElement(By.id("firstname"));
         NameInput.sendKeys("Test Name");
@@ -41,7 +47,7 @@ public class TestReg {
         WebElement SubInput = driver.findElement(By.id("is_subscribed"));
         SubInput.click();
         WebElement EmailInput = driver.findElement(By.id("email_address"));
-        EmailInput.sendKeys("testibstest@gmail.com"); // Не забыть заменить email
+        EmailInput.sendKeys(mail);
         WebElement PassInput = driver.findElement(By.id("password"));
         PassInput.sendKeys("!test123!");
         WebElement CpassInput = driver.findElement(By.id("password-confirmation"));
@@ -55,7 +61,7 @@ public class TestReg {
         String TestRegSuccess = RegSuccess.getText();
         Assert.assertEquals("Thank you for registering with Main Website Store.", TestRegSuccess);
     }
-    @After
+    @AfterClass
     public void teardownTest() {
         driver.quit();
     }
