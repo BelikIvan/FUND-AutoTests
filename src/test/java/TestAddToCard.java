@@ -3,7 +3,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -51,7 +50,7 @@ public class TestAddToCard {
         Category.click();
         WebElement SubCategory = driver.findElement(By.xpath("//div[contains(text(), 'Stickers & Decals')]"));
         SubCategory.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         WebElement Product1 = driver.findElement(By.xpath("//form[@data-product-sku='ST-13-P']"));
         Product1.click();
         //Thread.sleep(300);
@@ -63,7 +62,7 @@ public class TestAddToCard {
         //Thread.sleep(300);
         WebElement Product4 = driver.findElement(By.xpath("//form[@data-product-sku='ST-34LO-P']"));
         Product4.click();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         WebElement Card = driver.findElement(By.className("showcart"));
         Card.click();
     }
