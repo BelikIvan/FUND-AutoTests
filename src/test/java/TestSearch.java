@@ -20,15 +20,17 @@ public class TestSearch {
     }
     /*---------------------------------------- Test ----------------------------------------*/
     @Test
-    public void testSearch() {
+    public void testSearch() throws InterruptedException {
         // Находим поле поиска, вводим поисковую фразу и нажимаем на кнопку поиска
         WebElement SearchInput = driver.findElement(By.id("search"));
-        SearchInput.sendKeys("bracelets");
+        SearchInput.sendKeys("50 Pink Ribbon Shaped Silicone Bracelets (50 Bracelets)");
         SearchInput.submit();
+        Thread.sleep(2000);
 
         // Делаем проверку
-        String title = "Search results for: 'bracelets'";
-        Assert.assertEquals(driver.getTitle(), title);
+        WebElement NameProduct = driver.findElement(By.xpath("//a[contains(text(), '50 Pink Ribbon Shaped Silicone Bracelets (50 Bracelets)')]"));
+        String Name = NameProduct.getText();
+        Assert.assertEquals("50 Pink Ribbon Shaped Silicone Bracelets (50 Bracelets)", Name);
 
     }
     @AfterClass
