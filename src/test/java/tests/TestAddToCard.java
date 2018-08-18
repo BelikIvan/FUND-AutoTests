@@ -21,6 +21,7 @@ public class TestAddToCard {
     /*---------------------------------------- Test ----------------------------------------*/
     @Test
     public void testaddtocard() throws InterruptedException {
+
         // Находим ссылку авторизации/регистрации и кликаем по ней
         WebElement AuthA = driver.findElement(By.xpath("//a[contains(text(), 'Sign In/Register')]"));
         AuthA.click();
