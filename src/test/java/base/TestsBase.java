@@ -22,7 +22,6 @@ public class TestsBase {
     public void SetupConfig() {
         driver.get("https://ffcdev.fundraisingforacause.com/");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterMethod
