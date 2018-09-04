@@ -1,5 +1,6 @@
 package pageobjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,9 +26,6 @@ public class MainPage extends PageObject {
 
     @FindBy(className = "header-links-account-toggle")
     private WebElement LogOutSelect;
-
-    @FindBy(xpath = "//a[contains(text(), 'Log Out')]")
-    private WebElement LogOutA;
 
     // Регистрация
     @FindBy(xpath = "//span[contains(text(), 'Create an Account')]")
@@ -66,9 +64,6 @@ public class MainPage extends PageObject {
 
     @FindBy(xpath = "//span[contains(text(), 'Reset My Password')]")
     private WebElement ForgotButton;
-
-    @FindBy(xpath = "//div[text()='If there is an account associated with testibstest@gmail.com you will receive an email with a link to reset your password.']")
-    private WebElement ForgotSuccess;
 
     // Поиск
     @FindBy(id = "search")
@@ -119,8 +114,6 @@ public class MainPage extends PageObject {
         RegPass.sendKeys("!test123!");
         RegConfPass.sendKeys("!test123!");
         RegButton.click();
-        String TestRegSuccess = RegSuccess.getText();
-        Assert.assertEquals("Thank you for registering with Main Website Store.", TestRegSuccess);
     }
 
     public void testAuth() {
@@ -128,8 +121,6 @@ public class MainPage extends PageObject {
         AuthEmail.sendKeys("testibstest@gmail.com");
         AuthPass.sendKeys("!test123!");
         AuthButton.click();
-        String AuthSuccess = "https://ffcdev.fundraisingforacause.com/customer/account/";
-        Assert.assertEquals(driver.getCurrentUrl(), AuthSuccess);
     }
 
     public void testLogOut() {
@@ -138,11 +129,6 @@ public class MainPage extends PageObject {
         AuthPass.sendKeys("!test123!");
         AuthButton.click();
         LogOutSelect.click();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        WebElement WaitLogOutA = wait.until(ExpectedConditions.elementToBeClickable(LogOutA));
-        WaitLogOutA.click();
-        String LogOutUrl = "https://ffcdev.fundraisingforacause.com/customer/account/logoutSuccess/";
-        Assert.assertEquals(driver.getCurrentUrl(), LogOutUrl);
     }
 
     public void testForgotPass() {
@@ -150,35 +136,29 @@ public class MainPage extends PageObject {
         ForgotA.click();
         ForgotEmail.sendKeys("testibstest@gmail.com");
         ForgotButton.click();
-        String TestResetSuccess = ForgotSuccess.getText();
-        Assert.assertEquals("If there is an account associated with testibstest@gmail.com you will receive an email with a link to reset your password.", TestResetSuccess);
     }
 
     public void testSearch() {
         SearchInput.sendKeys("50 Pink Ribbon Shaped Silicone Bracelets (50 Bracelets)");
         SearchInput.submit();
-        String Search = SearchSuccess.getText();
-        Assert.assertEquals("50 Pink Ribbon Shaped Silicone Bracelets (50 Bracelets)", Search);
     }
 
-    public void testMenuVisibility() {
+    public void testMenuVisibilityMenuSBRC() {
         MenuSBRC.click();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        WebElement MenuVisibility = wait.until(ExpectedConditions.visibilityOf(MenuLink));
-        String UlMenu = MenuVisibility.getText();
-        Assert.assertEquals("No Texting", UlMenu);
+    }
+
+    public void testMenuVisibilityMenuSBC() {
         MenuSBC.click();
-        WebElement MenuVisibility2 = wait.until(ExpectedConditions.visibilityOf(MenuLink2));
-        String UlMenu2 = MenuVisibility2.getText();
-        Assert.assertEquals("Diseases & Health", UlMenu2);
     }
 
     public void testNewsletter() {
         Newsletter.sendKeys(mail);
         Newsletter.submit();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        WebElement NewsletterWait = wait.until(ExpectedConditions.visibilityOf(NewsletterSuccess));
-        String NewsletterText = NewsletterWait.getText();
-        Assert.assertEquals("Thank you for your subscription.", NewsletterText);
+    }
+    public void testLoginFail(String email, String pass) {
+        AuthA.click();
+        AuthEmail.sendKeys(email);
+        AuthPass.sendKeys(pass);
+        AuthButton.click();
     }
 }

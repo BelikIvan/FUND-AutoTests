@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class CategoryPage extends PageObject {
 
     // Добавление товара в корзину
@@ -24,12 +26,9 @@ public class CategoryPage extends PageObject {
     @FindBy(xpath = "//form[@data-product-sku='ST-13-P']/button/span[text()='Add to Cart']")
     private WebElement AddToCard;
 
-    @FindBy(xpath = "//div[text()='You added 250 Small 3/4 Inch Round Paw Print Stickers (250 Stickers) to your shopping cart.']")
-    private WebElement AddToCardSuccess;
-
     //Пагинация
     @FindBy(css = "li.pages-item-next")
-    private WebElement PaginationNext;
+    private List<WebElement> PaginationNext;
 
     // Хлебные крошки
     @FindBy(xpath = "//a[text()='Home']")
@@ -44,21 +43,13 @@ public class CategoryPage extends PageObject {
         Category.click();
         SubCategory.click();
         AddToCard.click();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        WebElement AddToCardWait = wait.until(ExpectedConditions.elementToBeClickable(AddToCardSuccess));
-        String AddToCardText = AddToCardWait.getText();
-        Assert.assertEquals("You added 250 Small 3/4 Inch Round Paw Print Stickers (250 Stickers) to your shopping cart.", AddToCardText);
     }
 
     public void testPagination() {
         MenuSBRC.click();
         Category.click();
         SubCategory2.click();
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-        jse.executeScript("scroll(0, 1100);");
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        WebElement PaginationWait = wait.until(ExpectedConditions.elementToBeClickable(PaginationNext));
-        PaginationWait.click();
+        PaginationNext.get(1).click();
     }
 
     public void testBreadcrumbs() {
