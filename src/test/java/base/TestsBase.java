@@ -13,16 +13,16 @@ public class TestsBase {
 
     @BeforeClass
     public void SetupDrivers() {
-//        System.setProperty("webdriver.chrome.driver", "E:/InstallProgram/drivers/chromedriver/chromedriver.exe");
-//        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "E:/InstallProgram/drivers/chromedriver/chromedriver.exe");
+        driver = new ChromeDriver();
 
-        System.setProperty("webdriver.gecko.driver", "E:/InstallProgram/drivers/geckodriver/geckodriver.exe");
-        driver = new FirefoxDriver();
+//        System.setProperty("webdriver.gecko.driver", "E:/InstallProgram/drivers/geckodriver/geckodriver.exe");
+//        driver = new FirefoxDriver();
     }
 
     @BeforeMethod
     public void SetupConfig() {
-        driver.get("https://ffcstage.fundraisingforacause.com/");
+        driver.get("https://ffcdev.fundraisingforacause.com/");
         driver.manage().window().maximize();
     }
 
